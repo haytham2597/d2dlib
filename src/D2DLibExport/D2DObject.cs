@@ -34,6 +34,10 @@ namespace unvell.D2DLib
 			this.handle = handle;
 		}
 
+		public bool IsValid()
+		{
+			return Handle != IntPtr.Zero;
+		}
 		public virtual void Dispose()
 		{
 			if (this.Handle != IntPtr.Zero) D2D.ReleaseObject(this.Handle);

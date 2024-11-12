@@ -147,7 +147,7 @@ namespace unvell.D2DLib.WinForm
 				{
 					this.graphics.BeginRender(D2DColor.FromGDIColor(this.BackColor));
 				}
-
+				
 
 				OnRender(this.graphics);
 

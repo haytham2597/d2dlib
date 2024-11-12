@@ -1,4 +1,4 @@
-/*
+﻿/*
 * MIT License
 *
 * Copyright (c) 2009-2021 Jingwood, unvell.com. All right reserved.
@@ -128,17 +128,29 @@ HANDLE CreateBitmapFromHBitmap(HANDLE ctx, HBITMAP hBitmap, BOOL alpha)
 HANDLE CreateBitmapFromMemory(HANDLE ctx, UINT width, UINT height, UINT stride, BYTE* buffer, UINT offset, UINT length)
 {
 	RetrieveContext(ctx);
-
+	//https://learn.microsoft.com/en-us/windows/win32/wic/-wic-codec-native-pixel-formats
 	IWICBitmap* wicBitmap = NULL;
-
-	HRESULT hr = context->imageFactory->CreateBitmapFromMemory(width, height, 
+	HRESULT hr = context->imageFactory->CreateBitmapFromMemory(width, height,
 		GUID_WICPixelFormat32bppPBGRA, stride, length, buffer, &wicBitmap);
 
 	ID2D1Bitmap* d2dBitmap = NULL;
 	hr = context->renderTarget->CreateBitmapFromWicBitmap(wicBitmap, NULL, &d2dBitmap);
-
 	SafeRelease(&wicBitmap);
 
+	return (HANDLE)d2dBitmap;
+}
+
+HANDLE CreateBitmapFromMat(HANDLE ctx, INT width, INT height, BYTE* buffer, INT length)
+{
+	RetrieveContext(ctx);
+	IWICBitmap* wicBitmap = nullptr;
+
+	HRESULT hr = context->imageFactory->CreateBitmapFromMemory(width, height, GUID_WICPixelFormat32bppPBGRA, width*4, length, buffer, &wicBitmap);
+	
+	ID2D1Bitmap* d2dBitmap = nullptr;
+	//hr = context->renderTarget->CreateBitmapFromWicBitmap(wicBitmap, &d2dBitmap);
+	hr = context->renderTarget->CreateBitmapFromWicBitmap(wicBitmap, nullptr, &d2dBitmap);
+	SafeRelease(&wicBitmap);
 	return (HANDLE)d2dBitmap;
 }
 

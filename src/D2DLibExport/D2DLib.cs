@@ -403,6 +403,9 @@ namespace unvell.D2DLib
 		public static extern HANDLE CreateBitmapFromMemory(HANDLE ctx, UINT width, UINT height, UINT stride, IntPtr buffer,
 			UINT offset, UINT length);
 
+		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+		public static extern HANDLE CreateBitmapFromMat(HANDLE ctx, int width, int height, IntPtr buffer, int length);
+
 		[DllImport(DLL_NAME, CharSet = CharSet.Unicode)]
 		public static extern HANDLE CreateBitmapFromFile(HANDLE context, string filepath);
 

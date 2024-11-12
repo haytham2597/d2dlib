@@ -232,6 +232,12 @@ namespace unvell.D2DLib
 			HANDLE d2dbmp = D2D.CreateBitmapFromMemory(this.Handle, width, height, stride, buffer, offset, length);
 			return d2dbmp == HANDLE.Zero ? null : new D2DBitmap(d2dbmp);
 		}
+		public D2DBitmap? CreateBitmapFromMat(int width, int height, IntPtr buffer, int length)
+		{
+			HANDLE d2dbmp = D2D.CreateBitmapFromMat(this.Handle, width, height, buffer, length);
+			return d2dbmp == HANDLE.Zero ? null : new D2DBitmap(d2dbmp);
+		}
+
 
 		public D2DLayer CreateLayer()
 		{
